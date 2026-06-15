@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Menu | ELITE DINER</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#131313",
+                        surface: "#1a1a1a",
+                        primary: "#e4e2e1",
+                        secondary: "#e9c349",
+                        "on-surface-variant": "#a0a0a0"
+                    },
+                    fontFamily: {
+                        "display": ["EB Garamond", "serif"],
+                        "body": ["Work Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #131313;
+            color: #e4e2e1;
+            font-family: 'Work Sans', sans-serif;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Header styling for back button and cart */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(233, 195, 73, 0.3);
+        }
+
+        .header-icon {
+            color: #e9c349;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .header-icon:hover {
+            opacity: 0.7;
+        }
+
+        .header-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: #e9c349;
+            text-transform: uppercase;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 2.5rem;
+            color: #e9c349;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e9c349;
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            padding-right: 1rem;
+        }
+
+        .item-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            color: #e4e2e1;
+            margin: 0 0 0.25rem 0;
+            line-height: 1.2;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        
+        .menu-item:hover .item-name {
+            color: #e9c349;
+        }
+
+        .item-desc {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: #a0a0a0;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.4;
+        }
+
+        .dotted-leader {
+            flex-grow: 1;
+            border-bottom: 2px dotted #444;
+            margin: 0 1rem 0.4rem 0;
+            opacity: 0.5;
+        }
+
+        .item-price {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1.25rem;
+            color: #e9c349;
+            white-space: nowrap;
+            margin-bottom: 0.2rem;
+            font-weight: 500;
+        }
+        
+        .add-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #e9c349;
+            color: #e9c349;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .add-btn:hover {
+            background: #e9c349;
+            color: #131313;
+        }
+        
+        .add-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .add-btn.added {
+            background: #e9c349;
+            color: #131313;
+        }
+        
+        .cart-badge-container {
+            position: relative;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e9c349;
+            color: #342800;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            display: none;
+        }
+        
+        /* Cart Modal Styles */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: #1a1a1a;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+        
+        .cart-modal.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(233, 195, 73, 0.3);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cart-header h2 {
+            font-family: 'EB Garamond', serif;
+            color: #e9c349;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: #e4e2e1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-items-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-item-info h4 {
+            margin: 0 0 0.5rem 0;
+            font-family: 'Work Sans', sans-serif;
+            color: #e4e2e1;
+            font-weight: 500;
+        }
+        
+        .cart-item-price {
+            color: #e9c349;
+            font-size: 0.9rem;
+        }
+        
+        .cart-qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .qty-btn {
+            background: rgba(233, 195, 73, 0.1);
+            border: 1px solid #e9c349;
+            color: #e9c349;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .cart-total {
+            border-top: 1px solid rgba(233, 195, 73, 0.3);
+            padding-top: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e4e2e1;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s;
+        }
+        
+        .whatsapp-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+        
+        .cart-overlay.open {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <button onclick="history.back()" class="header-icon">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <h1 class="header-title">ELITE DINER</h1>
+        <button id="cartIcon" class="header-icon cart-badge-container">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+    </header>
+
+
+<div class="menu-category">
+    <h2 class="category-title">Main Course</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Aloo Jeera</h3>
+            <p class="item-desc">Potatoes sautéed with cumin seeds and traditional Indian spices.</p>
+            <button class="add-btn" data-name="Aloo Jeera" data-price="229">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs229</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chana Masala</h3>
+            <p class="item-desc">Chickpeas cooked in a rich and flavorful tomato-based gravy.</p>
+            <button class="add-btn" data-name="Chana Masala" data-price="259">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs259</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Corn Palak</h3>
+            <p class="item-desc">Sweet corn and spinach cooked together in a creamy Indian-style gravy.</p>
+            <button class="add-btn" data-name="Corn Palak" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Dal Makhani</h3>
+            <p class="item-desc">Slow-cooked black lentils simmered with butter and cream.</p>
+            <button class="add-btn" data-name="Dal Makhani" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Dhingri Matar</h3>
+            <p class="item-desc">Fresh mushrooms and green peas cooked in aromatic spices.</p>
+            <button class="add-btn" data-name="Dhingri Matar" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chatpata Paneer</h3>
+            <p class="item-desc">Paneer cubes cooked in a tangy and spicy masala gravy.</p>
+            <button class="add-btn" data-name="Chatpata Paneer" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Kadhai Paneer</h3>
+            <p class="item-desc">Paneer tossed with capsicum, onions, and traditional kadhai spices.</p>
+            <button class="add-btn" data-name="Kadhai Paneer" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Kashmiri Aloo Dum</h3>
+            <p class="item-desc">Baby potatoes simmered in a rich Kashmiri-style gravy.</p>
+            <button class="add-btn" data-name="Kashmiri Aloo Dum" data-price="319">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs319</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Kashmiri Kofta</h3>
+            <p class="item-desc">Soft vegetable dumplings served in a luxurious Kashmiri gravy.</p>
+            <button class="add-btn" data-name="Kashmiri Kofta" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Masala Chaap Gravy</h3>
+            <p class="item-desc">Soya chaap cooked in a flavorful and creamy masala gravy.</p>
+            <button class="add-btn" data-name="Masala Chaap Gravy" data-price="339">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs339</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Matar Paneer</h3>
+            <p class="item-desc">Paneer and green peas cooked in a classic North Indian curry.</p>
+            <button class="add-btn" data-name="Matar Paneer" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Mix Veg</h3>
+            <p class="item-desc">A delicious combination of seasonal vegetables cooked in rich gravy.</p>
+            <button class="add-btn" data-name="Mix Veg" data-price="309">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs309</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Palak Paneer</h3>
+            <p class="item-desc">Fresh paneer cubes cooked in a creamy spinach gravy.</p>
+            <button class="add-btn" data-name="Palak Paneer" data-price="339">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs339</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Butter Masala</h3>
+            <p class="item-desc">Paneer simmered in a rich buttery tomato-based gravy.</p>
+            <button class="add-btn" data-name="Paneer Butter Masala" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Lababdar</h3>
+            <p class="item-desc">Paneer cooked in a rich and mildly spiced creamy gravy.</p>
+            <button class="add-btn" data-name="Paneer Lababdar" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Tikka Masala</h3>
+            <p class="item-desc">Tandoori paneer pieces cooked in a flavorful masala gravy.</p>
+            <button class="add-btn" data-name="Paneer Tikka Masala" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Punjabi Dal Handi</h3>
+            <p class="item-desc">Traditional Punjabi lentils slow-cooked with aromatic spices.</p>
+            <button class="add-btn" data-name="Punjabi Dal Handi" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Rajma Rasiley</h3>
+            <p class="item-desc">Kidney beans cooked in a rich, homestyle North Indian curry.</p>
+            <button class="add-btn" data-name="Rajma Rasiley" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Shahi Paneer</h3>
+            <p class="item-desc">Paneer served in a royal creamy gravy enriched with spices.</p>
+            <button class="add-btn" data-name="Shahi Paneer" data-price="309">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs309</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Yellow Dal Tadka</h3>
+            <p class="item-desc">Yellow lentils tempered with garlic, cumin, and Indian spices.</p>
+            <button class="add-btn" data-name="Yellow Dal Tadka" data-price="269">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs269</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Malai Kofta</h3>
+            <p class="item-desc">Soft paneer and vegetable dumplings served in a creamy gravy.</p>
+            <button class="add-btn" data-name="Malai Kofta" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+</div>
+    <div class="menu-container">
+        <div class="menu-category">
+    <h2 class="category-title">Chinese & Pan Asian</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Honey Chilli Potato</h3>
+            <p class="item-desc">Crispy potato fingers tossed in sweet and spicy chilli sauce.</p>
+            <button class="add-btn" data-name="Honey Chilli Potato" data-price="269">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs269</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chilly Paneer Dry</h3>
+            <p class="item-desc">Paneer cubes stir-fried with peppers, onions, and spicy sauces.</p>
+            <button class="add-btn" data-name="Chilly Paneer Dry" data-price="319">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs319</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chilli Mushroom Dry</h3>
+            <p class="item-desc">Mushrooms sautéed with vegetables and spicy Indo-Chinese flavors.</p>
+            <button class="add-btn" data-name="Chilli Mushroom Dry" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Manchurian Dry</h3>
+            <p class="item-desc">Vegetable dumplings tossed in flavorful Manchurian sauce.</p>
+            <button class="add-btn" data-name="Veg Manchurian Dry" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">American Chopsuey</h3>
+            <p class="item-desc">Crispy noodles topped with sweet and tangy vegetable gravy.</p>
+            <button class="add-btn" data-name="American Chopsuey" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chilly Garlic Noodles</h3>
+            <p class="item-desc">Stir-fried noodles infused with garlic and chilli flavors.</p>
+            <button class="add-btn" data-name="Chilly Garlic Noodles" data-price="269">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs269</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg in Hot Garlic Sauce</h3>
+            <p class="item-desc">Mixed vegetables cooked in a rich hot garlic sauce.</p>
+            <button class="add-btn" data-name="Veg in Hot Garlic Sauce" data-price="319">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs319</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chilly Paneer Gravy</h3>
+            <p class="item-desc">Paneer cooked in a spicy and savory Indo-Chinese gravy.</p>
+            <button class="add-btn" data-name="Chilly Paneer Gravy" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Manchurian Gravy</h3>
+            <p class="item-desc">Vegetable dumplings served in a delicious Manchurian gravy.</p>
+            <button class="add-btn" data-name="Veg Manchurian Gravy" data-price="339">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs339</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Hakka Noodles</h3>
+            <p class="item-desc">Classic stir-fried noodles with fresh vegetables and sauces.</p>
+            <button class="add-btn" data-name="Hakka Noodles" data-price="249">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs249</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Schezwan Fried Rice</h3>
+            <p class="item-desc">Spicy Schezwan-flavored fried rice with vegetables.</p>
+            <button class="add-btn" data-name="Schezwan Fried Rice" data-price="259">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs259</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Fried Rice</h3>
+            <p class="item-desc">Aromatic rice stir-fried with fresh vegetables and seasonings.</p>
+            <button class="add-btn" data-name="Veg Fried Rice" data-price="249">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs249</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Schewan Noodle</h3>
+            <p class="item-desc">Spicy Schezwan noodles tossed with vegetables and sauces.</p>
+            <button class="add-btn" data-name="Schewan Noodle" data-price="239">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs239</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Tola Chowmein</h3>
+            <p class="item-desc">Restaurant-style chowmein prepared with vegetables and spices.</p>
+            <button class="add-btn" data-name="Tola Chowmein" data-price="239">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs239</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Thai Veg Curry Green with Jasmine Rice</h3>
+            <p class="item-desc">Authentic Thai green curry served with fragrant jasmine rice.</p>
+            <button class="add-btn" data-name="Thai Veg Curry Green with Jasmine Rice" data-price="399">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs399</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Indian Assorted Bread</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Tandoori Roti</h3>
+            <p class="item-desc">Traditional whole wheat bread baked fresh in a clay tandoor.</p>
+            <button class="add-btn" data-name="Tandoori Roti" data-price="25">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs25</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Tandoori Roti Butter</h3>
+            <p class="item-desc">Classic tandoori roti topped with rich melted butter.</p>
+            <button class="add-btn" data-name="Tandoori Roti Butter" data-price="30">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs30</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Missi Roti</h3>
+            <p class="item-desc">Punjabi flatbread made with gram flour, wheat flour, and spices.</p>
+            <button class="add-btn" data-name="Missi Roti" data-price="50">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs50</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Aajwani Roti</h3>
+            <p class="item-desc">Soft Indian bread flavored with aromatic ajwain seeds.</p>
+            <button class="add-btn" data-name="Aajwani Roti" data-price="50">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs50</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chur Chur Naan</h3>
+            <p class="item-desc">Crispy layered naan brushed with butter and traditional spices.</p>
+            <button class="add-btn" data-name="Chur Chur Naan" data-price="69">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs69</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Kashmiri Naan</h3>
+            <p class="item-desc">Sweet and flavorful naan stuffed with dry fruits and nuts.</p>
+            <button class="add-btn" data-name="Kashmiri Naan" data-price="99">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs99</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Laccha Paratha</h3>
+            <p class="item-desc">Multi-layered flaky paratha cooked until golden and crisp.</p>
+            <button class="add-btn" data-name="Laccha Paratha" data-price="55">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs55</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Butter Naan</h3>
+            <p class="item-desc">Soft tandoor-baked naan generously brushed with butter.</p>
+            <button class="add-btn" data-name="Butter Naan" data-price="59">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs59</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Plain Naan</h3>
+            <p class="item-desc">Traditional soft naan baked in a tandoor.</p>
+            <button class="add-btn" data-name="Plain Naan" data-price="55">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs55</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Pudina Paratha</h3>
+            <p class="item-desc">Layered paratha infused with fresh mint and spices.</p>
+            <button class="add-btn" data-name="Pudina Paratha" data-price="70">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs70</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Stuff Kulcha</h3>
+            <p class="item-desc">Soft kulcha stuffed with flavorful traditional fillings.</p>
+            <button class="add-btn" data-name="Stuff Kulcha" data-price="79">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs79</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Stuff Paratha</h3>
+            <p class="item-desc">Whole wheat paratha filled with a delicious savory stuffing.</p>
+            <button class="add-btn" data-name="Stuff Paratha" data-price="80">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs80</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Stuff Naan</h3>
+            <p class="item-desc">Tandoor-baked naan stuffed with rich and flavorful fillings.</p>
+            <button class="add-btn" data-name="Stuff Naan" data-price="80">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs80</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cheese Corn Naan</h3>
+            <p class="item-desc">Naan stuffed with melted cheese and sweet corn.</p>
+            <button class="add-btn" data-name="Cheese Corn Naan" data-price="80">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs80</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cheese Chilly Naan</h3>
+            <p class="item-desc">Cheesy naan infused with spicy green chillies.</p>
+            <button class="add-btn" data-name="Cheese Chilly Naan" data-price="85">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs85</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Methi Paratha</h3>
+            <p class="item-desc">Fresh fenugreek paratha cooked with authentic Indian spices.</p>
+            <button class="add-btn" data-name="Methi Paratha" data-price="65">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs65</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cheese Garlic Naan</h3>
+            <p class="item-desc">Soft naan loaded with garlic flavor and melted cheese.</p>
+            <button class="add-btn" data-name="Cheese Garlic Naan" data-price="79">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs79</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Kulcha</h3>
+            <p class="item-desc">Kulcha stuffed with seasoned cottage cheese filling.</p>
+            <button class="add-btn" data-name="Paneer Kulcha" data-price="89">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs89</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Stuff Paratha</h3>
+            <p class="item-desc">Paratha generously stuffed with spiced paneer filling.</p>
+            <button class="add-btn" data-name="Paneer Stuff Paratha" data-price="79">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs79</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Bread Basket</h3>
+            <p class="item-desc">A delightful assortment of freshly baked Indian breads.</p>
+            <button class="add-btn" data-name="Bread Basket" data-price="229">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs229</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Rice & Pulao</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Jeera Rice</h3>
+            <p class="item-desc">Fragrant basmati rice tempered with roasted cumin seeds.</p>
+            <button class="add-btn" data-name="Jeera Rice" data-price="189">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs189</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Kashmiri Pulao</h3>
+            <p class="item-desc">Aromatic pulao prepared with dry fruits, nuts, and mild spices.</p>
+            <button class="add-btn" data-name="Kashmiri Pulao" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Peas Pulao</h3>
+            <p class="item-desc">Flavorful basmati rice cooked with green peas and whole spices.</p>
+            <button class="add-btn" data-name="Peas Pulao" data-price="229">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs229</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Steamed Rice</h3>
+            <p class="item-desc">Perfectly steamed premium basmati rice.</p>
+            <button class="add-btn" data-name="Steamed Rice" data-price="159">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs159</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Dum Biryani</h3>
+            <p class="item-desc">Aromatic basmati rice layered with vegetables and dum-cooked spices.</p>
+            <button class="add-btn" data-name="Veg Dum Biryani" data-price="339">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs339</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Pulao</h3>
+            <p class="item-desc">Classic vegetable pulao cooked with fresh vegetables and spices.</p>
+            <button class="add-btn" data-name="Veg Pulao" data-price="259">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs259</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Soup</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cream of Tomato Soup</h3>
+            <p class="item-desc">Rich and creamy tomato soup with a smooth texture.</p>
+            <button class="add-btn" data-name="Cream of Tomato Soup" data-price="169">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs169</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Hot & Sour Soup</h3>
+            <p class="item-desc">A spicy and tangy Indo-Chinese soup loaded with vegetables.</p>
+            <button class="add-btn" data-name="Hot & Sour Soup" data-price="149">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs149</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Manchow Soup</h3>
+            <p class="item-desc">Popular Chinese-style soup served with crispy noodles.</p>
+            <button class="add-btn" data-name="Manchow Soup" data-price="169">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs169</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Clear Soup</h3>
+            <p class="item-desc">Light vegetable broth packed with fresh vegetables.</p>
+            <button class="add-btn" data-name="Veg Clear Soup" data-price="149">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs149</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Healthy Salad & Raita Bowls</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Aloo Chana Chaat</h3>
+            <p class="item-desc">Tangy and flavorful potato and chickpea chaat.</p>
+            <button class="add-btn" data-name="Aloo Chana Chaat" data-price="199">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs199</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Bob Marley Salad</h3>
+            <p class="item-desc">Fresh mixed vegetable salad packed with nutrition and flavor.</p>
+            <button class="add-btn" data-name="Bob Marley Salad" data-price="249">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs249</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Boondi Raita</h3>
+            <p class="item-desc">Refreshing yogurt mixed with crispy boondi and mild spices.</p>
+            <button class="add-btn" data-name="Boondi Raita" data-price="149">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs149</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Caesar Salad</h3>
+            <p class="item-desc">Classic salad with fresh greens, dressing, and crunchy toppings.</p>
+            <button class="add-btn" data-name="Caesar Salad" data-price="229">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs229</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cucumber Raita</h3>
+            <p class="item-desc">Cool yogurt blended with fresh cucumber and spices.</p>
+            <button class="add-btn" data-name="Cucumber Raita" data-price="149">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs149</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Green Salad</h3>
+            <p class="item-desc">A healthy mix of fresh seasonal vegetables.</p>
+            <button class="add-btn" data-name="Green Salad" data-price="139">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs139</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Mix Raita</h3>
+            <p class="item-desc">Creamy yogurt mixed with assorted vegetables and spices.</p>
+            <button class="add-btn" data-name="Mix Raita" data-price="149">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs149</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Pineapple Raita</h3>
+            <p class="item-desc">Sweet and refreshing pineapple blended with chilled yogurt.</p>
+            <button class="add-btn" data-name="Pineapple Raita" data-price="169">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs169</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Plain Curd</h3>
+            <p class="item-desc">Fresh homemade curd served chilled.</p>
+            <button class="add-btn" data-name="Plain Curd" data-price="109">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs109</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Tangy Lime Corn Salad</h3>
+            <p class="item-desc">Sweet corn tossed with lime dressing and fresh herbs.</p>
+            <button class="add-btn" data-name="Tangy Lime Corn Salad" data-price="249">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs249</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">The Greek Salad</h3>
+            <p class="item-desc">Mediterranean-style salad with fresh vegetables and herbs.</p>
+            <button class="add-btn" data-name="The Greek Salad" data-price="229">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs229</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Beetroot Raita</h3>
+            <p class="item-desc">Nutritious yogurt preparation with fresh beetroot and spices.</p>
+            <button class="add-btn" data-name="Beetroot Raita" data-price="159">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs159</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Burgers & Sandwiches</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cheese Corn Sandwich</h3>
+            <p class="item-desc">A delicious grilled sandwich stuffed with cheese and sweet corn filling.</p>
+            <button class="add-btn" data-name="Cheese Corn Sandwich" data-price="269">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs269</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Grilled Veg Sandwich</h3>
+            <p class="item-desc">Fresh vegetables layered and grilled to perfection in toasted bread.</p>
+            <button class="add-btn" data-name="Grilled Veg Sandwich" data-price="269">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs269</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Indiana Burger</h3>
+            <p class="item-desc">A flavorful vegetarian burger with signature Indian-inspired seasonings.</p>
+            <button class="add-btn" data-name="Indiana Burger" data-price="239">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs239</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Tikka Sandwich</h3>
+            <p class="item-desc">Grilled sandwich filled with smoky paneer tikka and fresh vegetables.</p>
+            <button class="add-btn" data-name="Paneer Tikka Sandwich" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Pesto Sandwich</h3>
+            <p class="item-desc">A gourmet sandwich loaded with vegetables and aromatic pesto sauce.</p>
+            <button class="add-btn" data-name="Veg Pesto Sandwich" data-price="279">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs279</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Mexican Veg Burger</h3>
+            <p class="item-desc">Spicy Mexican-style veggie burger topped with fresh vegetables and sauces.</p>
+            <button class="add-btn" data-name="Mexican Veg Burger" data-price="259">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs259</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Falafel Cheese Burger</h3>
+            <p class="item-desc">Crispy falafel patty combined with melted cheese in a soft burger bun.</p>
+            <button class="add-btn" data-name="Falafel Cheese Burger" data-price="249">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs249</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Grilled Cottage Cheese Burger</h3>
+            <p class="item-desc">A premium burger featuring grilled paneer, fresh vegetables, and sauces.</p>
+            <button class="add-btn" data-name="Grilled Cottage Cheese Burger" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Italian Pizzas & Pasta</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cheese Corn Pizza</h3>
+            <p class="item-desc">Classic pizza topped with mozzarella cheese and sweet corn.</p>
+            <button class="add-btn" data-name="Cheese Corn Pizza" data-price="369">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs369</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Tangy Jalapeno Pepper Pizza</h3>
+            <p class="item-desc">Cheesy pizza loaded with jalapenos and a tangy pepper kick.</p>
+            <button class="add-btn" data-name="Tangy Jalapeno Pepper Pizza" data-price="369">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs369</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Margherita Pizza</h3>
+            <p class="item-desc">Traditional Italian pizza topped with mozzarella and tomato sauce.</p>
+            <button class="add-btn" data-name="Margherita Pizza" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Four Cheese Pizza</h3>
+            <p class="item-desc">Rich and creamy pizza topped with a blend of four premium cheeses.</p>
+            <button class="add-btn" data-name="Four Cheese Pizza" data-price="369">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs369</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Golden Corn Pizza</h3>
+            <p class="item-desc">A delightful pizza loaded with sweet golden corn and melted cheese.</p>
+            <button class="add-btn" data-name="Golden Corn Pizza" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Greek Meditrain Pizza</h3>
+            <p class="item-desc">Mediterranean-style pizza topped with fresh vegetables and herbs.</p>
+            <button class="add-btn" data-name="Greek Meditrain Pizza" data-price="349">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs349</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Makhani Pizza</h3>
+            <p class="item-desc">Fusion pizza topped with paneer makhani and creamy Indian flavors.</p>
+            <button class="add-btn" data-name="Paneer Makhani Pizza" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Tikka Pizza</h3>
+            <p class="item-desc">Pizza topped with smoky paneer tikka, vegetables, and cheese.</p>
+            <button class="add-btn" data-name="Paneer Tikka Pizza" data-price="369">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs369</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Rainbow Tax Max Pizza</h3>
+            <p class="item-desc">Colorful signature pizza loaded with assorted vegetables and cheese.</p>
+            <button class="add-btn" data-name="Rainbow Tax Max Pizza" data-price="359">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs359</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Tandoori Khazana</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Muhroom Tikka</h3>
+            <p class="item-desc">Fresh mushrooms marinated with spices and grilled in a tandoor.</p>
+            <button class="add-btn" data-name="Muhroom Tikka" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Achari Paneer Tikka</h3>
+            <p class="item-desc">Paneer cubes marinated in tangy pickle spices and tandoor grilled.</p>
+            <button class="add-btn" data-name="Achari Paneer Tikka" data-price="319">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs319</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Afgani Chaap</h3>
+            <p class="item-desc">Creamy and mildly spiced soya chaap cooked in Afghan-style marinade.</p>
+            <button class="add-btn" data-name="Afgani Chaap" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Malai Paneer Tikka</h3>
+            <p class="item-desc">Soft paneer marinated in rich cream and grilled to perfection.</p>
+            <button class="add-btn" data-name="Malai Paneer Tikka" data-price="319">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs319</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Amritsari Chaap</h3>
+            <p class="item-desc">Traditional Punjabi-style chaap marinated with aromatic spices.</p>
+            <button class="add-btn" data-name="Amritsari Chaap" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Banjara Paneer Tikka</h3>
+            <p class="item-desc">Rustic-style paneer tikka prepared with flavorful tandoori spices.</p>
+            <button class="add-btn" data-name="Banjara Paneer Tikka" data-price="319">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs319</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Buranshi Kasta Seekh</h3>
+            <p class="item-desc">Signature seekh kebab crafted with unique herbs and spices.</p>
+            <button class="add-btn" data-name="Buranshi Kasta Seekh" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Malai Chaap</h3>
+            <p class="item-desc">Creamy soya chaap marinated in rich malai and grilled.</p>
+            <button class="add-btn" data-name="Malai Chaap" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Mirch Makhmaliseekh</h3>
+            <p class="item-desc">Soft seekh kebab infused with mild chilli flavors and spices.</p>
+            <button class="add-btn" data-name="Mirch Makhmaliseekh" data-price="279">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs279</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Paneer Tikka</h3>
+            <p class="item-desc">Classic paneer tikka grilled with traditional Indian spices.</p>
+            <button class="add-btn" data-name="Paneer Tikka" data-price="309">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs309</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Veg Seekh Kabab</h3>
+            <p class="item-desc">Vegetable seekh kababs grilled with aromatic herbs and spices.</p>
+            <button class="add-btn" data-name="Veg Seekh Kabab" data-price="269">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs269</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Tandoori Veg Platter</h3>
+            <p class="item-desc">A grand assortment of paneer, chaap, mushrooms, and tandoori specialties.</p>
+            <button class="add-btn" data-name="Tandoori Veg Platter" data-price="499">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs499</div>
+    </div>
+</div>
+<div class="menu-category">
+    <h2 class="category-title">Appetizers</h2>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Bruschetta</h3>
+            <p class="item-desc">Crispy toasted bread topped with fresh vegetables, herbs, and flavorful seasonings.</p>
+            <button class="add-btn" data-name="Bruschetta" data-price="249">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs249</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Cheese Garlic Bread</h3>
+            <p class="item-desc">Freshly baked garlic bread loaded with melted cheese and herbs.</p>
+            <button class="add-btn" data-name="Cheese Garlic Bread" data-price="209">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs209</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Dahi Ke Kabab</h3>
+            <p class="item-desc">Soft yogurt-based kebabs blended with aromatic spices and herbs.</p>
+            <button class="add-btn" data-name="Dahi Ke Kabab" data-price="289">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs289</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Chilli Cheese Toast</h3>
+            <p class="item-desc">Crunchy toasted bread topped with cheese and spicy chilli flavors.</p>
+            <button class="add-btn" data-name="Chilli Cheese Toast" data-price="209">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs209</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Falafel with Hummus</h3>
+            <p class="item-desc">Crispy Middle Eastern falafel served with creamy hummus dip.</p>
+            <button class="add-btn" data-name="Falafel with Hummus" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Thai Spring Roll</h3>
+            <p class="item-desc">Golden crispy spring rolls stuffed with vegetables and Thai seasonings.</p>
+            <button class="add-btn" data-name="Thai Spring Roll" data-price="259">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs259</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Dahi Ke Shole</h3>
+            <p class="item-desc">Crispy fried rolls stuffed with a flavorful yogurt and cheese filling.</p>
+            <button class="add-btn" data-name="Dahi Ke Shole" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">Hara Bhara Kabab</h3>
+            <p class="item-desc">Healthy spinach and green pea kebabs seasoned with Indian spices.</p>
+            <button class="add-btn" data-name="Hara Bhara Kabab" data-price="299">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs299</div>
+    </div>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3 class="item-name">French Fry</h3>
+            <p class="item-desc">Golden crispy potato fries served hot and perfectly seasoned.</p>
+            <button class="add-btn" data-name="French Fry" data-price="179">ADD TO ORDER</button>
+        </div>
+        <div class="dotted-leader"></div>
+        <div class="item-price">rs179</div>
+    </div>
+</div>
+
+    </div>
+    
+    <!-- Cart Overlay & Modal -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h2>Your Order</h2>
+            <button class="close-cart" id="closeCartBtn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <div class="cart-items-container" id="cartItemsContainer">
+            <!-- Items injected by JS -->
+        </div>
+        
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotalPrice">rs0</span>
+        </div>
+        
+        <button class="whatsapp-btn" id="whatsappBtn">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Order on WhatsApp
+        </button>
+    </div>
+
+    <script>
+        // Cart State
+        let cart = [];
+        
+        // Elements
+        const cartBadge = document.getElementById('cartBadge');
+        const cartModal = document.getElementById('cartModal');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartIcon = document.getElementById('cartIcon');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalPrice = document.getElementById('cartTotalPrice');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        
+        // Open/Close Cart
+        cartIcon.addEventListener('click', () => {
+            cartModal.classList.add('open');
+            cartOverlay.classList.add('open');
+            renderCart();
+        });
+        
+        const closeCart = () => {
+            cartModal.classList.remove('open');
+            cartOverlay.classList.remove('open');
+        };
+        closeCartBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+        
+        // Add to Cart
+        window.addToCartLocal = function(name, priceStr) {
+            const price = parseFloat(priceStr);
+            const existing = cart.find(item => item.name === name);
+            if(existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({name, price, qty: 1});
+            }
+            updateBadge();
+            renderCart();
+        };
+        
+        // Update Quantity
+        window.updateCartQty = function(name, delta) {
+            const item = cart.find(i => i.name === name);
+            if(item) {
+                item.qty += delta;
+                if(item.qty <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+            }
+            updateBadge();
+            renderCart();
+        };
+        
+        function updateBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartBadge.textContent = totalItems;
+            cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+        
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            
+            if(cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align:center; color:#a0a0a0; margin-top:2rem;">Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.qty;
+                    total += itemTotal;
+                    
+                    const el = document.createElement('div');
+                    el.className = 'cart-item';
+                    el.innerHTML = `
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div class="cart-item-price">rs${itemTotal}</div>
+                        </div>
+                        <div class="cart-qty-controls">
+                            <button class="qty-btn" onclick="updateCartQty('${item.name.replace(/'/g, "\\'")}', -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="updateCartQty('${item.name.replace(/'/g, "\\'")}', 1)">+</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(el);
+                });
+            }
+            cartTotalPrice.textContent = 'rs' + total;
+        }
+        
+        // WhatsApp Order Logic
+        whatsappBtn.addEventListener('click', () => {
+            if(cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            let total = 0;
+            let msg = "Hey Elite's Diner Restaurant 🍽️%0APlz Confirm My Order%0A%0A";
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                msg += `${item.qty} × ${item.name} : rs${itemTotal}%0A`;
+            });
+            
+            msg += `%0A💰 Total Bill Amount : rs${total}%0A%0ALet's proceed with the payment.`;
+            
+            window.open(`https://wa.me/919548907207?text=${msg}`, '_blank');
+        });
+
+        // Attach event listeners to Add to Order buttons
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = this.getAttribute('data-price');
+                
+                // Add to cart
+                addToCartLocal(name, price);
+                
+                // Visual feedback
+                const originalText = this.innerText;
+                this.innerText = '✓ ADDED';
+                this.classList.add('added');
+                
+                setTimeout(() => {
+                    this.innerText = originalText;
+                    this.classList.remove('added');
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

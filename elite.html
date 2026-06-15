@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elite Membership &amp; Combos | Cafe Elite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#131313",
+                    "secondary-container": "#af8d11",
+                    "tertiary-fixed": "#e6e2dd",
+                    "surface-container-highest": "#353535",
+                    "on-secondary-fixed-variant": "#574500",
+                    "secondary-fixed-dim": "#e9c349",
+                    "primary": "#c8c6c5",
+                    "surface-tint": "#c8c6c5",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#241a00",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#131210",
+                    "surface-variant": "#353535",
+                    "on-primary-container": "#7e7d7d",
+                    "inverse-primary": "#5f5e5e",
+                    "primary-fixed": "#e5e2e1",
+                    "on-primary-fixed": "#1c1b1b",
+                    "on-error": "#690005",
+                    "error-container": "#93000a",
+                    "outline": "#8e9192",
+                    "secondary": "#e9c349",
+                    "on-tertiary": "#31302d",
+                    "on-background": "#e4e2e1",
+                    "secondary-fixed": "#ffe088",
+                    "on-secondary": "#3c2f00",
+                    "tertiary": "#c9c6c1",
+                    "on-tertiary-container": "#7f7d79",
+                    "inverse-surface": "#e4e2e1",
+                    "surface-container": "#1f2020",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-low": "#1b1c1c",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "on-surface": "#e4e2e1",
+                    "surface": "#131313",
+                    "on-tertiary-fixed-variant": "#484743",
+                    "tertiary-fixed-dim": "#c9c6c1",
+                    "on-tertiary-fixed": "#1c1c19",
+                    "on-surface-variant": "#c4c7c7",
+                    "inverse-on-surface": "#303030",
+                    "primary-container": "#121212",
+                    "on-error-container": "#ffdad6",
+                    "surface-bright": "#393939",
+                    "on-secondary-container": "#342800",
+                    "on-primary": "#313030",
+                    "outline-variant": "#444748",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed-variant": "#474646"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "48px",
+                    "stack-sm": "8px",
+                    "stack-md": "24px",
+                    "unit": "8px",
+                    "gutter": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg-mobile": ["EB Garamond"],
+                    "title-md": ["EB Garamond"],
+                    "display-lg": ["EB Garamond"],
+                    "label-caps": ["Work Sans"],
+                    "headline-lg": ["EB Garamond"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
+                    "title-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e4e2e1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dotted-leader {
+            border-bottom: 1px dotted #444748;
+            flex-grow: 1;
+            margin: 0 8px 6px 8px;
+        }
+        .metal-bronze { border-color: #cd7f32; color: #cd7f32; }
+        .metal-silver { border-color: #c0c0c0; color: #c0c0c0; }
+        .metal-gold { border-color: #e9c349; color: #e9c349; }
+        .metal-platinum { border-color: #e5e4e2; color: #e5e4e2; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-outline-variant/30 flat no shadows">
+<div class="flex items-center justify-between px-gutter h-16 w-full max-w-md mx-auto">
+<button class="active:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-secondary dark:text-secondary">menu</span>
+</button>
+<h1 class="font-display-lg text-title-md tracking-widest text-secondary dark:text-secondary uppercase">ELITE DINER</h1>
+<button class="active:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-secondary dark:text-secondary">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32 max-w-md mx-auto px-container-margin min-h-screen">
+<!-- Super Combo Card (Showcase) -->
+<section class="mb-stack-lg">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl group border border-outline-variant/20">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-end gourmet dining spread captured in a dark, atmospheric restaurant. The image features multiple silver platters of prime rib, lobster tail, and roasted vegetables under warm, golden spotlighting. The aesthetic is deep charcoal and rich gold, emphasizing the luxury of an 'Elite' dining experience with soft shadows and sharp highlights on crystal glassware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYRxK2yICfPH_qSwJTlrLzX9FgrAmwFyNsuIZXhqggq2v_i4YgQtMLZEi6bAiEY4l9MvJZccZ9wUMmHuEjNs3DD-e9xsZrszhPZySpYojvK-qlVNOwHMMd717Dyq67nf_qsIWA22fSUYPnzGhwzYJ0sPaT7MnUDFcfWyd5Y3KnMkz0o3vhAnYxcINDWykxloSC8rqLmmm3jtAoDfK5wbGLXGxBhUaVSdi4LNjDv9-rHpG4IVMPn7HeRFkROFItTzK1yZuypBM096A"/>
+<div class="absolute bottom-0 left-0 w-full p-stack-md z-20">
+<span class="font-label-caps text-label-caps text-secondary mb-2 block uppercase tracking-widest">Featured Showcase</span>
+<h2 class="font-display-lg text-headline-lg-mobile text-on-background mb-stack-sm leading-tight">The Ultimate Elite Combo</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                        Experience every signature flavor in one masterfully curated collection. A symphony of textures and tastes reserved for our most discerning guests.
+                    </p>
+<div class="mt-stack-md flex items-center gap-2">
+<span class="w-12 h-[1px] bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">Limited Availability</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Tiered Cards Header -->
+<div class="mb-stack-md">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Membership Tiers</h3>
+<p class="font-body-md text-on-tertiary-container mt-1">Select an exclusive membership to unlock the full diner experience.</p>
+</div>
+<!-- Tiered Grid -->
+<div class="grid grid-cols-1 gap-stack-md mb-stack-lg">
+<!-- Bronze Tier -->
+<div class="bg-surface-container-high rounded-xl p-stack-md border border-outline-variant/30 flex flex-col justify-between hover:border-[#cd7f32]/50 transition-colors">
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<h4 class="font-title-md text-title-md text-[#cd7f32]">Bronze Tier</h4>
+<span class="material-symbols-outlined text-[#cd7f32]">stars</span>
+</div>
+<div class="flex items-end mb-stack-sm">
+<span class="font-display-lg text-headline-lg text-on-background">  649</span>
+<span class="font-body-md text-on-tertiary-container ml-1 mb-2">/ month</span>
+</div>
+<ul class="space-y-2 mb-stack-md">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Daily Complimentary Coffee</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">10% Off All Pastries</span>
+</li>
+</ul>   
+</div>
+<button class="w-full py-4 border border-[#cd7f32] text-[#cd7f32] font-label-caps text-label-caps uppercase tracking-widest active:bg-[#cd7f32] active:text-background transition-all duration-200">
+                    ADD TO ORDER
+                </button>
+</div>
+<!-- Silver Tier -->
+<div class="bg-surface-container-high rounded-xl p-stack-md border border-outline-variant/30 flex flex-col justify-between hover:border-[#c0c0c0]/50 transition-colors">
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<h4 class="font-title-md text-title-md text-[#c0c0c0]">Silver Tier</h4>
+<span class="material-symbols-outlined text-[#c0c0c0]">workspace_premium</span>
+</div>
+<div class="flex items-end mb-stack-sm">
+<span class="font-display-lg text-headline-lg text-on-background">  699</span>
+<span class="font-body-md text-on-tertiary-container ml-1 mb-2">/ month</span>
+</div>
+<ul class="space-y-2 mb-stack-md">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Priority Breakfast Seating</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Unlimited Signature Teas</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Monthly Dessert Sampler</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-4 border border-[#c0c0c0] text-[#c0c0c0] font-label-caps text-label-caps uppercase tracking-widest active:bg-[#c0c0c0] active:text-background transition-all duration-200">
+                    ADD TO ORDER
+                </button>
+</div>
+<!-- Gold Tier -->
+<div class="bg-surface-container-high rounded-xl p-stack-md border border-secondary/40 flex flex-col justify-between hover:border-secondary transition-colors relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-secondary text-background px-3 py-1 font-label-caps text-[10px] uppercase font-bold tracking-tighter">Popular</div>
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<h4 class="font-title-md text-title-md text-secondary">Gold Tier</h4>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div class="flex items-end mb-stack-sm">
+<span class="font-display-lg text-headline-lg text-on-background">  6199</span>
+<span class="font-body-md text-on-tertiary-container ml-1 mb-2">/ month</span>
+</div>
+<ul class="space-y-2 mb-stack-md">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">24/7 Table Reservations</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Private Dining Room Access</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Exclusive Wine Tastings</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-4 border border-secondary text-secondary font-label-caps text-label-caps uppercase tracking-widest active:bg-secondary active:text-background transition-all duration-200">
+                    ADD TO ORDER
+                </button>
+</div>
+<!-- Platinum Tier -->
+<div class="bg-surface-container-high rounded-xl p-stack-md border border-outline-variant/30 flex flex-col justify-between hover:border-[#e5e4e2]/50 transition-colors">
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<h4 class="font-title-md text-title-md text-[#e5e4e2]">Platinum Tier</h4>
+<span class="material-symbols-outlined text-[#e5e4e2]" style="font-variation-settings: 'FILL' 1;">diamond</span>
+</div>
+<div class="flex items-end mb-stack-sm">
+<span class="font-display-lg text-headline-lg text-on-background">  6499</span>
+<span class="font-body-md text-on-tertiary-container ml-1 mb-2">/ month</span>
+</div>
+<ul class="space-y-2 mb-stack-md">
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Chef's Table Preference</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Personal Sommelier Service</span>
+</li>
+<li class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-2">check_circle</span>
+<span class="font-body-md">Home Catering (4x/Year)</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-4 border border-[#e5e4e2] text-[#e5e4e2] font-label-caps text-label-caps uppercase tracking-widest active:bg-[#e5e4e2] active:text-background transition-all duration-200">
+                    ADD TO ORDER
+                </button>
+</div>
+</div>
+<!-- Heritage Section / Footer Note -->
+<section class="text-center pb-12">
+<h5 class="font-display-lg text-title-md text-secondary mb-2">Since 2024</h5>
+<p class="font-body-md text-on-tertiary-container italic">The standards of excellence are non-negotiable.</p>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-container-margin py-stack-lg flex flex-col items-center gap-stack-md mb-20 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/10 flat">
+<div class="font-display-lg text-title-md text-secondary">ELITE DINER</div>
+<div class="flex gap-4">
+<a class="font-body-md text-on-tertiary-container hover:text-secondary transition-colors" href="#">Privacy</a>
+<a class="font-body-md text-on-tertiary-container hover:text-secondary transition-colors" href="#">Terms</a>
+<a class="font-body-md text-on-tertiary-container hover:text-secondary transition-colors" href="#">Allergens</a>
+</div>
+<p class="font-body-md text-on-tertiary-container">© 2026 Cafe Elite Diner. Est. 2024.</p>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-surface-container dark:bg-surface-container border-t border-outline-variant/20 shadow-[0_-4px_12px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-on-tertiary-container dark:text-on-tertiary-container hover:text-secondary-fixed transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-tertiary-container dark:text-on-tertiary-container hover:text-secondary-fixed transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Menu</span>
+</a>
+<!-- ACTIVE STATE: Elite -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary font-bold hover:text-secondary-fixed transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Elite</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-tertiary-container dark:text-on-tertiary-container hover:text-secondary-fixed transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">event_seat</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Book</span>
+</a>
+</nav>
+<script>
+        // Simple interactive feedback for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.innerText.includes('ADD TO ORDER')) {
+                    const originalText = this.innerText;
+                    this.innerText = 'ADDED';
+                    this.classList.add('bg-on-background', 'text-background');
+                    setTimeout(() => {
+                        this.innerText = originalText;
+                        this.classList.remove('bg-on-background', 'text-background');
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body></html>

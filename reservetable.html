@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elite Diner - Secure Your Table</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#1c1c19",
+                      "on-surface-variant": "#c4c7c7",
+                      "on-tertiary-container": "#7f7d79",
+                      "surface": "#131313",
+                      "primary-fixed": "#e5e2e1",
+                      "surface-variant": "#353535",
+                      "inverse-primary": "#5f5e5e",
+                      "background": "#131313",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "tertiary-fixed-dim": "#c9c6c1",
+                      "on-secondary": "#3c2f00",
+                      "secondary": "#e9c349",
+                      "error-container": "#93000a",
+                      "secondary-container": "#af8d11",
+                      "on-error": "#690005",
+                      "tertiary": "#c9c6c1",
+                      "surface-dim": "#131313",
+                      "outline-variant": "#444748",
+                      "on-primary-container": "#7e7d7d",
+                      "surface-container": "#1f2020",
+                      "error": "#ffb4ab",
+                      "primary": "#c8c6c5",
+                      "secondary-fixed-dim": "#e9c349",
+                      "outline": "#8e9192",
+                      "tertiary-container": "#131210",
+                      "surface-container-high": "#2a2a2a",
+                      "tertiary-fixed": "#e6e2dd",
+                      "on-secondary-fixed": "#241a00",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface-bright": "#393939",
+                      "on-tertiary-fixed-variant": "#484743",
+                      "primary-container": "#121212",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-primary": "#313030",
+                      "inverse-surface": "#e4e2e1",
+                      "surface-container-low": "#1b1c1c",
+                      "on-tertiary": "#31302d",
+                      "inverse-on-surface": "#303030",
+                      "on-surface": "#e4e2e1",
+                      "on-background": "#e4e2e1",
+                      "surface-container-highest": "#353535",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-secondary-fixed-variant": "#574500",
+                      "surface-tint": "#c8c6c5",
+                      "on-secondary-container": "#342800",
+                      "secondary-fixed": "#ffe088"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "24px",
+                      "unit": "8px",
+                      "container-margin": "24px",
+                      "stack-lg": "48px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Work Sans"],
+                      "title-md": ["EB Garamond"],
+                      "body-lg": ["Work Sans"],
+                      "headline-lg-mobile": ["EB Garamond"],
+                      "display-lg": ["EB Garamond"],
+                      "headline-lg": ["EB Garamond"],
+                      "label-caps": ["Work Sans"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "title-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .active-ring {
+            box-shadow: 0 0 0 1px #e9c349;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary/30">
+<!-- Reservation Overlay Container -->
+<div class="relative min-h-screen w-full flex flex-col bg-surface overflow-x-hidden">
+<!-- Background Imagery (Subtle Atmospheric) -->
+<div class="fixed inset-0 z-0 opacity-40 grayscale pointer-events-none">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast interior of a luxury diner at night with dark leather booths and warm amber lighting reflecting off polished mahogany surfaces. The atmosphere is quiet and exclusive, with soft light catching the edges of crystal glassware and gold-rimmed plates. The color palette is dominated by deep charcoals, blacks, and rich golden highlights, evoking a sense of timeless elegance and elite service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQFbpz9a9f-ZpWO-9LAYdpRs-E0Kge5VyZ_H7GYqAzj_s5eJElXmj-FePUmQqrV1fj5h4FO5TohHJKDKGSxnJzbpJVmj_5tNlxo3EAQ0byoheL-9nSctWAt8r1iZOEdHI_PsSpvxQEBlOKAvc3-h5MpskuEkrX32Z2enEqhdX9By1OacXMs6XYsBwuOGLqCo4EUNwR7I6yvC0A8_ix7Qi0D2ge-Cnem06Tb_kjxqmzU7RSiy6ACFqX5Z8buMGlCUh7GJhh8pvdppM"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background"></div>
+</div>
+<!-- Top Header Navigation -->
+<header class="fixed top-0 w-full z-50 bg-background/20 backdrop-blur-sm border-b border-outline-variant/30 px-gutter h-16 flex items-center justify-between max-w-md mx-auto left-0 right-0">
+<button onclick="history.back()" class="p-2 transition-opacity active:opacity-70">
+<span class="material-symbols-outlined text-secondary">arrow_back</span>
+</button>
+<span class="font-display-lg text-title-md tracking-widest text-secondary">ELITE DINER</span>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<!-- Main Reservation Canvas -->
+<main class="relative z-10 flex-grow px-container-margin pt-24 pb-stack-lg max-w-md mx-auto w-full">
+<!-- Headline Section -->
+<section class="mb-stack-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Secure Your Table</h1>
+<p class="font-body-md text-on-surface-variant">Experience the pinnacle of dining at Cafe Elite.</p>
+</section>
+<form class="space-y-stack-lg">
+<!-- Date Selection Section -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<label class="font-label-caps text-label-caps text-secondary uppercase">Select Date</label>
+<span id="month-display" class="text-on-tertiary-container text-xs font-body-md">October 2024</span>
+</div>
+<div class="flex overflow-x-auto gap-4 pb-2 hide-scrollbar snap-x">
+<!-- Date Cards -->
+<div class="flex-shrink-0 snap-start">
+<input checked="" class="hidden peer" id="date-1" name="date" type="radio"/>
+<label class="flex flex-col items-center justify-center w-16 h-20 rounded-lg border border-outline-variant/50 bg-surface-container-low transition-all peer-checked:bg-secondary-container peer-checked:border-secondary peer-checked:text-on-secondary" for="date-1">
+<span class="text-xs uppercase font-label-caps opacity-70">Fri</span>
+<span class="text-xl font-bold font-title-md">18</span>
+</label>
+</div>
+<div class="flex-shrink-0 snap-start">
+<input class="hidden peer" id="date-2" name="date" type="radio"/>
+<label class="flex flex-col items-center justify-center w-16 h-20 rounded-lg border border-outline-variant/50 bg-surface-container-low transition-all peer-checked:bg-secondary-container peer-checked:border-secondary peer-checked:text-on-secondary" for="date-2">
+<span class="text-xs uppercase font-label-caps opacity-70">Sat</span>
+<span class="text-xl font-bold font-title-md">19</span>
+</label>
+</div>
+<div class="flex-shrink-0 snap-start">
+<input class="hidden peer" id="date-3" name="date" type="radio"/>
+<label class="flex flex-col items-center justify-center w-16 h-20 rounded-lg border border-outline-variant/50 bg-surface-container-low transition-all peer-checked:bg-secondary-container peer-checked:border-secondary peer-checked:text-on-secondary" for="date-3">
+<span class="text-xs uppercase font-label-caps opacity-70">Sun</span>
+<span class="text-xl font-bold font-title-md">20</span>
+</label>
+</div>
+<div class="flex-shrink-0 snap-start">
+<input class="hidden peer" id="date-4" name="date" type="radio"/>
+<label class="flex flex-col items-center justify-center w-16 h-20 rounded-lg border border-outline-variant/50 bg-surface-container-low transition-all peer-checked:bg-secondary-container peer-checked:border-secondary peer-checked:text-on-secondary" for="date-4">
+<span class="text-xs uppercase font-label-caps opacity-70">Mon</span>
+<span class="text-xl font-bold font-title-md">21</span>
+</label>
+</div>
+<div class="flex-shrink-0 snap-start">
+<input class="hidden peer" id="date-5" name="date" type="radio"/>
+<label class="flex flex-col items-center justify-center w-16 h-20 rounded-lg border border-outline-variant/50 bg-surface-container-low transition-all peer-checked:bg-secondary-container peer-checked:border-secondary peer-checked:text-on-secondary" for="date-5">
+<span class="text-xs uppercase font-label-caps opacity-70">Tue</span>
+<span class="text-xl font-bold font-title-md">22</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Guest Count Section -->
+<section>
+<label class="font-label-caps text-label-caps text-secondary uppercase block mb-4">Guest Count</label>
+<div class="flex items-center justify-between p-4 bg-surface-container-high rounded-xl border border-outline-variant/20">
+<button class="w-12 h-12 flex items-center justify-center rounded-full border border-secondary text-secondary transition-colors active:bg-secondary active:text-on-secondary" onclick="decrementGuest()" type="button">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<div class="text-center">
+<span class="text-3xl font-title-md text-on-surface" id="guest-count">2</span>
+<span class="block text-xs uppercase font-label-caps text-on-tertiary-container">Guests</span>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full border border-secondary text-secondary transition-colors active:bg-secondary active:text-on-secondary" onclick="incrementGuest()" type="button">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</section>
+<!-- Time Selection Section -->
+<section>
+<label class="font-label-caps text-label-caps text-secondary uppercase block mb-4">Available Times</label>
+<div class="grid grid-cols-3 gap-3">
+<input class="hidden peer" id="time-1" name="time" type="radio"/>
+<label class="py-3 flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface transition-all peer-checked:border-secondary peer-checked:text-secondary peer-checked:bg-secondary/10" for="time-1">6:00 PM</label>
+<input checked="" class="hidden peer" id="time-2" name="time" type="radio"/>
+<label class="py-3 flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface transition-all peer-checked:border-secondary peer-checked:text-secondary peer-checked:bg-secondary/10" for="time-2">6:30 PM</label>
+<input class="hidden peer" id="time-3" name="time" type="radio"/>
+<label class="py-3 flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface transition-all peer-checked:border-secondary peer-checked:text-secondary peer-checked:bg-secondary/10" for="time-3">7:00 PM</label>
+<input class="hidden peer" id="time-4" name="time" type="radio"/>
+<label class="py-3 flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface transition-all peer-checked:border-secondary peer-checked:text-secondary peer-checked:bg-secondary/10" for="time-4">7:30 PM</label>
+<input class="hidden peer" id="time-5" name="time" type="radio"/>
+<label class="py-3 flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface transition-all peer-checked:border-secondary peer-checked:text-secondary peer-checked:bg-secondary/10" for="time-5">8:00 PM</label>
+<input class="hidden peer" id="time-6" name="time" type="radio"/>
+<label class="py-3 flex items-center justify-center rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface transition-all peer-checked:border-secondary peer-checked:text-secondary peer-checked:bg-secondary/10" for="time-6">8:30 PM</label>
+</div>
+</section>
+<!-- Additional Info (Elite Detail) -->
+<section class="pt-4">
+<div class="p-4 bg-secondary/5 border border-secondary/20 rounded-xl flex gap-4">
+<span class="material-symbols-outlined text-secondary shrink-0">info</span>
+<p class="text-xs font-body-md text-on-tertiary-container italic">
+                            Your Presence is requested to maintain our dining atmosphere. Tables are held for 15 minutes past reservation time.
+                        </p>
+</div>
+</section>
+</form>
+</main>
+<!-- Footer Action (Sticky) -->
+<footer class="fixed bottom-0 w-full z-50 bg-surface-container/95 backdrop-blur-md border-t border-outline-variant/10 px-container-margin py-6 max-w-md mx-auto left-0 right-0">
+<button onclick="confirmReservation()" class="w-full bg-secondary text-on-secondary font-label-caps text-label-caps py-4 rounded-xl shadow-lg transition-transform active:scale-95 hover:bg-secondary-fixed duration-200">
+                CONFIRM RESERVATION
+            </button>
+</footer>
+</div>
+<script>
+        let count = 2;
+        const guestDisplay = document.getElementById('guest-count');
+
+        function incrementGuest() {
+            if(count < 12) {
+                count++;
+                guestDisplay.innerText = count;
+                animateValue(guestDisplay);
+            }
+        }
+
+        function decrementGuest() {
+            if(count > 1) {
+                count--;
+                guestDisplay.innerText = count;
+                animateValue(guestDisplay);
+            }
+        }
+
+        function animateValue(el) {
+            el.classList.add('scale-110');
+            setTimeout(() => el.classList.remove('scale-110'), 150);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const monthDisplay = document.getElementById('month-display');
+            if (monthDisplay) {
+                const targetDate = new Date();
+                targetDate.setDate(targetDate.getDate() + 2);
+                
+                const optionsMonthYear = { month: 'long', year: 'numeric' };
+                monthDisplay.textContent = targetDate.toLocaleDateString('en-US', optionsMonthYear);
+                
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                let currentLoopDate = new Date(targetDate);
+                
+                for (let i = 1; i <= 5; i++) {
+                    const label = document.querySelector(`label[for="date-${i}"]`);
+                    if (label) {
+                        const spans = label.querySelectorAll('span');
+                        if (spans.length >= 2) {
+                            spans[0].textContent = dayNames[currentLoopDate.getDay()];
+                            spans[1].textContent = currentLoopDate.getDate();
+                        }
+                    }
+                    currentLoopDate.setDate(currentLoopDate.getDate() + 1);
+                }
+            }
+        });
+
+        function confirmReservation() {
+            const guests = document.getElementById('guest-count').innerText;
+
+            const selectedDateInput = document.querySelector('input[name="date"]:checked');
+            let fullDate = "Unknown Date";
+            if (selectedDateInput) {
+                const dateLabel = document.querySelector(`label[for="${selectedDateInput.id}"]`);
+                const dateSpans = dateLabel.querySelectorAll('span');
+                const monthYear = document.getElementById('month-display') ? document.getElementById('month-display').innerText : '';
+                if (dateSpans.length >= 2) {
+                    fullDate = `${dateSpans[0].innerText}, ${dateSpans[1].innerText} ${monthYear}`;
+                }
+            }
+
+            const selectedTimeInput = document.querySelector('input[name="time"]:checked');
+            let selectedTime = "Unknown Time";
+            if (selectedTimeInput) {
+                const timeLabel = document.querySelector(`label[for="${selectedTimeInput.id}"]`);
+                if (timeLabel) {
+                    selectedTime = timeLabel.innerText;
+                }
+            }
+
+            const message = `Hello Elite Diner,\nI would like to book a table.\n*Details:*\n📅 Date: ${fullDate}\n⏰ Time: ${selectedTime}\n👥 Guests: ${guests}\n\nPlease confirm my reservation.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/919548907207?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body></html>

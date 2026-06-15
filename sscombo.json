@@ -1,0 +1,130 @@
+
+[
+  {
+    "name": "Amritsari Chole Mini Meal",
+    "price": 259,
+    "tag": "North Indian",
+    "desc": "Authentic Amritsari-style chole served with 2 tandoori rotis, fresh lime corn salad, and green chutney."
+  },
+  {
+    "name": "Banarasi Dum Aloo Mini Meal Combo",
+    "price": 259,
+    "tag": "Banarasi Special",
+    "desc": "Flavorful Banarasi dum aloo curry paired with 2 tandoori rotis, lime corn salad, and green chutney."
+  },
+  {
+    "name": "Chilly Paneer Bowl",
+    "price": 289,
+    "tag": "Indo-Chinese",
+    "desc": "Spicy and tangy chilli paneer bowl served with a delicious combo option."
+  },
+  {
+    "name": "Dal Khichdi With Yogurt Box",
+    "price": 239,
+    "tag": "Comfort Food",
+    "desc": "Wholesome dal khichdi served with fresh yogurt for a light and nutritious meal."
+  },
+  {
+    "name": "Dal Makhani Mini Meal",
+    "price": 259,
+    "tag": "Punjabi",
+    "desc": "Creamy dal makhani served with 2 tandoori rotis, corn lime salad, and green chutney."
+  },
+  {
+    "name": "Dal Makhani Rice Box Combo",
+    "price": 289,
+    "tag": "Rice Bowl",
+    "desc": "Rich and buttery dal makhani paired with steamed rice, corn lime salad, and green chutney."
+  },
+  {
+    "name": "Desi Dal Tadka Rice Box",
+    "price": 279,
+    "tag": "Homestyle",
+    "desc": "Traditional dal tadka served with steamed rice and refreshing lime accompaniment."
+  },
+  {
+    "name": "Dilli Wale Rajma Chawal Box Combo",
+    "price": 289,
+    "tag": "Delhi Special",
+    "desc": "Classic Delhi-style rajma chawal served with corn lime salad and mint chutney."
+  },
+  {
+    "name": "Dum Gobhi Adraki Mini Meal",
+    "price": 249,
+    "tag": "North Indian",
+    "desc": "Aromatic ginger-flavored dum gobhi served with 2 tandoori rotis, corn lime salad, and green chutney."
+  },
+  {
+    "name": "Kadhai Paneer Mini Meal",
+    "price": 279,
+    "tag": "Paneer Special",
+    "desc": "Spicy kadhai paneer served with 2 tandoori rotis, lime corn salad, and mint chutney."
+  },
+  {
+    "name": "Malai Kofta Mini Meal Combo",
+    "price": 279,
+    "tag": "Rich & Creamy",
+    "desc": "Soft malai koftas in rich gravy served with 2 tandoori butter rotis, lime corn salad, and green chutney."
+  },
+  {
+    "name": "Manchurian Bowl",
+    "price": 289,
+    "tag": "Indo-Chinese",
+    "desc": "Flavor-packed Manchurian bowl served with a satisfying combo option."
+  },
+  {
+    "name": "Matar Paneer Rice Box Combo",
+    "price": 269,
+    "tag": "Paneer & Rice",
+    "desc": "Matar paneer served with steamed rice, corn lime salad, and mint chutney."
+  },
+  {
+    "name": "Mushroom Masala Mini Meal Combo",
+    "price": 269,
+    "tag": "Mushroom Special",
+    "desc": "Flavorful mushroom masala served with 2 tandoori butter rotis, lime corn salad, and green chutney."
+  },
+  {
+    "name": "Mushroom Matar Masala Rice Box Combo",
+    "price": 289,
+    "tag": "Rice Bowl",
+    "desc": "Exotic mushroom and green peas masala served with rice, lime corn salad, and mint chutney."
+  },
+  {
+    "name": "Palak Paneer Mini Meal",
+    "price": 259,
+    "tag": "Healthy Choice",
+    "desc": "Nutritious palak paneer served with 2 tandoori rotis, lime corn salad, and green chutney."
+  },
+  {
+    "name": "Palak Paneer Rice Box Combo",
+    "price": 299,
+    "tag": "Paneer & Rice",
+    "desc": "Creamy palak paneer paired with steamed rice, corn lime salad, and green chutney."
+  },
+  {
+    "name": "Paneer Butter Masala Mini Meal",
+    "price": 259,
+    "tag": "Customer Favorite",
+    "desc": "Rich paneer butter masala served with 2 tandoori rotis, corn lime salad, and green chutney."
+  },
+  {
+    "name": "Paneer Lababdaar Meal Combo",
+    "price": 269,
+    "tag": "Signature Paneer",
+    "desc": "Paneer lababdar served with 2 tandoori butter rotis, lime corn salad, and green chutney."
+  },
+  {
+    "name": "Paneer Lababdar Rice Box Combo",
+    "price": 289,
+    "tag": "Rice Bowl",
+    "desc": "Creamy paneer lababdar served with steamed rice, corn lime salad, and green chutney."
+  },
+  {
+    "name": "Rasile Chole Chawal Box",
+    "price": 289,
+    "tag": "Classic Combo",
+    "desc": "Delicious rasile chole served with rice, lime corn salad, and refreshing mint chutney."
+  }
+]
+
